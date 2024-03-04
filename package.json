@@ -6,19 +6,27 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "seed:db": "ts-node ./seed/index.ts",
     "lint": "next lint"
   },
   "dependencies": {
+    "bcrypt": "^5.1.1",
+    "mongoose": "^8.0.0",
+    "next": "^14.1.0",
+    "next-auth": "^4.24.4",
     "react": "^18",
     "react-dom": "^18",
-    "next": "14.0.1"
+    "styled-components": "^6.1.8"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@types/bcrypt": "^5.0.2",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "babel-plugin-styled-components": "^2.1.4",
     "eslint": "^8",
-    "eslint-config-next": "14.0.1"
+    "eslint-config-next": "14.0.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5"
   }
 }
