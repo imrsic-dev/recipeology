@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import { useRouter } from 'next/router';
 import { signIn } from "next-auth/react";
 import type { FormEvent } from "react";
 
@@ -12,6 +13,8 @@ import Icon from "@/components/UI/Icon";
 import { PStyled, RegisterStyled } from "./style";
 
 const Register: React.FC = () => {
+  const router = useRouter();
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -23,12 +26,14 @@ const Register: React.FC = () => {
       body: JSON.stringify({
         email: formData.get("email"),
         password: formData.get("password"),
+        username: formData.get("username"),
       }),
     });
 
     if (response.ok) {
       const responseData = await response.json(); // Parse JSON from the response
       console.log("Registration successful:", responseData);
+       router.push('/');
     }
   };
 

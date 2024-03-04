@@ -9,21 +9,27 @@ export default async function registerUser(
 ) {
   try {
     await dbConnect();
-    const { email, password } = req.body;
+    const { email, password, username } = req.body;
     /** TODO: validation */
-    // console.log(email, password);
-    // check if email is used
-    // const query = User.where({ email: email });
-    // await query.findOne();
+    if (!email || !password || !username) {
+      return res.status(400).json({ message: 'Missing fields.' });
+    }
+    
     const isUsedEmail = await User.findOne({ email: email });
     if (isUsedEmail) {
       return res.status(401).json({ message: 'Email already taken.' });
     }
+
+    const isUsedUsername = await User.findOne({ username: username });
+    if (isUsedUsername) {
+      return res.status(400).json({ message: 'Username already taken.' });
+    }
+
     const hashedPassword = await hash(password, 9);
 
     const user = new User({
-      name: 'fake',
-      email: email,
+      username,
+      email,
       password: hashedPassword,
     });
 
